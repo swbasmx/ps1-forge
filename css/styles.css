@@ -1,0 +1,331 @@
+/* =========================================
+   PS1 FORGE - HOJA DE ESTILOS PRINCIPAL
+   ========================================= */
+
+/* Reseteo básico para asegurar consistencia entre navegadores */
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+/* Variables de Color Base (Tema Oscuro por defecto) */
+:root { 
+  --bg: #000; 
+  --text: #fff; 
+  --border: #111; 
+  --border-h: #fff; 
+}
+
+/* Comportamiento fluido del scroll */
+html { scroll-behavior: smooth; }
+
+/* Estilos base del body */
+body { 
+  background: var(--bg); 
+  color: var(--text); 
+  font-family: 'Space Mono', monospace; 
+  min-height: 100vh; 
+  overflow-x: hidden; 
+  cursor: crosshair; /* Cursor de estilo hacker/tech */
+  display: flex; 
+  flex-direction: column; 
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Filtro SVG de Ruido Fractal (Textura de fondo cyberpunk) */
+body::before {
+  content: ''; 
+  position: fixed; 
+  inset: 0; 
+  pointer-events: none; 
+  mix-blend-mode: overlay; 
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* =========================================
+   TEMA CLARO (LIGHT MODE)
+   ========================================= */
+body.light { 
+  --bg: #f4f4f4; 
+  --text: #111; 
+  --border: #ddd; 
+  --border-h: #000; 
+}
+body.light .preview-panel { background: #fafafa; }
+body.light .pbox { background: #fff; border-color: #ddd; color: #111; }
+body.light .cbox { background: #eee; border-color: #ddd; color: #333; }
+body.light .ez-container { background: #fff; }
+body.light .drag-pill { background: #eaeaea; color: #333; border-color: #ccc; }
+body.light .drag-pill.active { background: #111; color: #fff; border-color: #000; }
+body.light .drag-pill:not(.active):hover { border-color: #888; color: #000; }
+body.light .input { background: #fff; color: #111; border-color: #ccc; }
+body.light .btn { background: #111; color: #fff; }
+body.light .btn-outline { border-color: #ccc; color: #111; }
+body.light .btn-outline:hover { background: #111; color: #fff; }
+body.light .deco-asterisk { color: #ddd; }
+
+/* =========================================
+   ENCABEZADO (HEADER)
+   ========================================= */
+.header { 
+  padding: 40px 30px; 
+  border-bottom: 1px solid var(--border); 
+  position: relative; 
+}
+.title { 
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: clamp(3rem, 8vw, 6rem); 
+  letter-spacing: 2px; 
+  line-height: 1; 
+}
+.subtitle { 
+  font-family: 'IM Fell English', serif; 
+  font-style: italic; 
+  font-size: 14px; 
+  color: #888; 
+  margin-top: 10px; 
+}
+.corner-tr{ 
+  position: absolute; 
+  top: 18px; 
+  right: 20px; 
+  font-size: 9px; 
+  letter-spacing: 2px; 
+  color: #555; 
+  text-transform: uppercase; 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+}
+
+/* Botón de alternar Tema */
+#theme-toggle { 
+  background: transparent; 
+  border: 1px solid currentColor; 
+  color: inherit; 
+  padding: 2px 8px; 
+  cursor: pointer; 
+  font-family: 'Space Mono'; 
+  transition: 0.2s; 
+}
+#theme-toggle:hover { background: var(--text); color: var(--bg); }
+
+/* =========================================
+   DISEÑO PRINCIPAL (GRID LAYOUT)
+   ========================================= */
+.main { 
+  display: grid; 
+  grid-template-columns: 1fr 450px; 
+  flex: 1; 
+  align-items: start; 
+}
+.panel { 
+  padding: 30px; 
+  border-right: 1px solid var(--border); 
+  display: flex; 
+  flex-direction: column; 
+  gap: 30px; 
+}
+.section-title { 
+  font-size: 9px; 
+  letter-spacing: 4px; 
+  color: #888; 
+  text-transform: uppercase; 
+  margin-bottom: 16px; 
+  border-bottom: 1px solid var(--border); 
+  padding-bottom: 8px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+/* =========================================
+   RESPONSIVE & MOBILE STICKY VIEW
+   ========================================= */
+@media(max-width: 900px){ 
+  .main { 
+    grid-template-columns: 1fr; 
+    display: flex; 
+    flex-direction: column-reverse; /* El Preview se coloca arriba en móviles */
+  } 
+  .panel { 
+    border-right: none!important; 
+    border-bottom: 1px solid var(--border); 
+  } 
+  /* Preview Terminal pegajoso en móviles */
+  .preview-panel {
+    position: sticky; 
+    top: 0; 
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding: 20px!important; 
+    max-height: 45vh; 
+    overflow-y: auto;
+  }
+  body.light .preview-panel { box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+  .pbox { min-height: 60px!important; padding: 15px!important; margin-bottom: 15px!important; }
+  .cbox { display: none; } /* Ocultar el código en móviles para ahorrar espacio */
+  .deco-asterisk { display: none; }
+}
+
+/* =========================================
+   PÍLDORAS DE OPCIONES (MARCOS, ICONOS)
+   ========================================= */
+.opts { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 6px; 
+  max-height: 250px; 
+  overflow-y: auto; 
+  padding-right: 4px; 
+}
+.opts::-webkit-scrollbar { width: 4px; }
+.opts::-webkit-scrollbar-track { background: transparent; }
+.opts::-webkit-scrollbar-thumb { background: #555; }
+
+.pill { 
+  background: transparent; 
+  border: 1px solid var(--border); 
+  color: #888; 
+  padding: 6px 12px; 
+  font-family: 'Space Mono', monospace; 
+  font-size: 10px; 
+  cursor: pointer; 
+  transition: all .2s; 
+  white-space: nowrap; 
+  text-transform: uppercase;
+}
+.pill:hover { border-color: var(--border-h); color: var(--text); background: rgba(128,128,128,0.1); }
+.pill.active { border-color: #555; color: var(--text); background: rgba(128,128,128,0.2); }
+
+/* =========================================
+   SELECTORES DE COLOR
+   ========================================= */
+.c-grids { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.c-group { margin-bottom: 10px; }
+.c-label { font-size: 9px; letter-spacing: 2px; color: #888; margin-bottom: 8px; text-transform: uppercase; }
+.c-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.c-dot { 
+  width: 16px; 
+  height: 16px; 
+  border-radius: 50%; 
+  border: 1px solid #333; 
+  cursor: pointer; 
+  transition: transform .2s; 
+}
+.c-dot:hover { transform: scale(1.3); }
+.c-dot.active { border: 2px solid var(--text); outline: 2px solid var(--bg); }
+
+/* =========================================
+   CONSTRUCTOR VISUAL (EZPROMPT)
+   ========================================= */
+.ez-container { background: rgba(128,128,128,0.05); border: 1px solid var(--border); padding: 20px; margin-bottom: 15px; }
+.ez-title { font-size: 9px; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-bottom: 12px; }
+.ez-list { display: flex; flex-wrap: wrap; gap: 8px; min-height: 35px; }
+
+/* Bloques arrastrables */
+.drag-pill { 
+  cursor: grab; 
+  background: #1a1a1a; 
+  color: #fff; 
+  border: 1px solid #444; 
+  padding: 8px 14px; 
+  font-size: 10px; 
+  font-family: 'Space Mono'; 
+  transition: transform 0.1s; 
+  user-select: none; 
+  text-transform: uppercase; 
+  display: flex; 
+  align-items: center; 
+  gap: 5px; 
+}
+.drag-pill:active { cursor: grabbing; transform: scale(0.95); }
+.drag-pill.dragging { opacity: 0.5; }
+.drag-pill:not(.active) { background: transparent; color: #666; border-color: #333; cursor: pointer; }
+.drag-pill:not(.active):hover { color: var(--text); border-color: #666; }
+
+/* =========================================
+   INPUTS DE TEXTO Y DESPLEGABLES
+   ========================================= */
+.inputs { display: flex; gap: 10px; margin-bottom: 10px; }
+@media(max-width: 500px){ .inputs { flex-direction: column; } }
+.input { 
+  background: transparent; 
+  border: 1px solid var(--border); 
+  color: var(--text); 
+  font-family: 'Space Mono'; 
+  font-size: 10px; 
+  padding: 8px 12px; 
+  width: 100%; 
+  transition: 0.2s; 
+}
+.input:focus { outline: none; border-color: #888; }
+.input option { background: var(--bg); color: var(--text); }
+
+/* =========================================
+   PANEL DE PREVISUALIZACIÓN Y CÓDIGO
+   ========================================= */
+.preview-panel { padding: 40px 30px; position: relative; background: var(--bg); }
+.pbox { 
+  background: #050505; 
+  border: 1px solid #1a1a1a; 
+  padding: 30px; 
+  min-height: 120px; 
+  font-size: 14px; 
+  margin-bottom: 30px; 
+  line-height: 1.6; 
+  word-break: break-all; 
+}
+.cbox { 
+  background: #020202; 
+  border: 1px solid #1a1a1a; 
+  padding: 20px; 
+  font-size: 10px; 
+  color: #888; 
+  word-break: break-all; 
+  margin-bottom: 20px; 
+  line-height: 1.8; 
+  white-space: pre-wrap; 
+}
+
+/* =========================================
+   BOTONES GLOBALES
+   ========================================= */
+.btn { 
+  background: var(--text); 
+  color: var(--bg); 
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: 1.5rem; 
+  letter-spacing: 2px; 
+  padding: 10px; 
+  width: 100%; 
+  border: none; 
+  cursor: pointer; 
+  margin-bottom: 10px; 
+  transition: all .2s; 
+}
+.btn:hover { opacity: 0.8; }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid #444; }
+.btn-outline:hover { background: var(--border); border-color: var(--text); }
+.btn-outline:disabled { opacity: 0.3; cursor: not-allowed; }
+.btn-outline:disabled:hover { background: transparent; border-color: #444; color: var(--text); }
+
+/* Decoración estética de asterisco rotatorio */
+.deco-asterisk { 
+  position: absolute; 
+  font-family: 'IM Fell English', serif; 
+  font-size: 6rem; 
+  color: #111; 
+  top: 50px; 
+  right: 50px; 
+  pointer-events: none; 
+  animation: spin 30s linear infinite; 
+  z-index: -1; 
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =========================================
+   PIE DE PÁGINA (FOOTER)
+   ========================================= */
+.footer { border-top: 1px solid var(--border); padding: 20px 30px; background: var(--bg); }
+.footer-content { display: flex; justify-content: space-between; font-size: 9px; letter-spacing: 2px; color: #555; text-transform: uppercase; }
+@media(max-width: 600px){ .footer-content { flex-direction: column; gap: 10px; text-align: center; } }
