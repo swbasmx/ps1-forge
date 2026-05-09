@@ -1,5 +1,8 @@
-# ⚡ PS1 FORGE
+<div align="center">
+  <img src="https://socialify.git.ci/swbasmx/ps1-forge/image?description=1&font=Inter&language=1&name=1&owner=1&pattern=Circuit+Board&theme=Light" alt="PS1 Forge Socialify" width="600"/>
+</div>
 
+# ⚡ PS1 FORGE
 > Un constructor visual de prompts de Bash (PS1) con estética brutalista, 50 marcos topológicos, coloreado independiente y motor interactivo de arrastrar y soltar.
 
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
