@@ -3,10 +3,7 @@
 // Contiene las estructuras, iconos y colores disponibles.
 // =========================================
 
-// 1. MARCOS TOPOLÓGICOS (50 estilos)
-// Define cómo se renderizan y unen los bloques lógicos (Path, User, etc.)
 const FRAMES = [
-  // ESTILOS DE LÍNEA (Unidos por caracteres conectores)
   { id: 'kali', name: 'Kali', type: 'line', chars: ['┌','─','└','─',''], u1:'(', u2:')' },
   { id: 'round', name: 'Round', type: 'line', chars: ['╭','─','╰','─',''], u1:'(', u2:')' },
   { id: 'double', name: 'Double', type: 'line', chars: ['╔','═','╚','═',''], u1:'(', u2:')' },
@@ -23,7 +20,6 @@ const FRAMES = [
   { id: 'nodes', name: 'Nodes', type: 'line', chars: ['⚬','─','⚬','─',''], u1:'(', u2:')' },
   { id: 'triangles', name: 'Triangles', type: 'line', chars: ['▼','─','▶','─',''], u1:'(', u2:')' },
 
-  // ESTILOS DE TEXTO LIBRE (Unidos dinámicamente)
   { id: 'chevron', name: 'Chevron', type: 'free-text', build: (c,m,arr) => arr.join(c(m, ' ► ')) },
   { id: 'brackets2', name: 'Japanese', type: 'free-text', build: (c,m,arr) => arr.map(x=>c(m,'【')+x+c(m,'】')).join('') },
   { id: 'slashes', name: 'Slashes', type: 'free-text', build: (c,m,arr) => arr.join(c(m, ' // ')) },
@@ -38,7 +34,6 @@ const FRAMES = [
   { id: 'pill', name: 'Pill', type: 'free-text', build: (c,m,arr) => c(m,'(') + arr.join(c(m, ' | ')) + c(m,')') },
   { id: 'tag', name: 'XML Tag', type: 'free-text', build: (c,m,arr) => arr.map(x=>c(m,'<')+x+c(m,'>')).join(' ') },
 
-  // ESTILOS DE TEXTO FIJO / SEMÁNTICOS (Estructuras de programación realistas)
   { id: 'arch', name: 'Arch', type: 'text', build: (c, m, v, t, uh, p, g) => `${v?v+' ':''}${t?t+' ':''}${c(m,'[')}${uh?uh+' ':''}${p}${c(m,']')}${g}` },
   { id: 'ubuntu', name: 'Ubuntu', type: 'text', build: (c, m, v, t, uh, p, g) => `${v?v+' ':''}${t?t+' ':''}${uh?uh+c(m,':'):''}${p}${g}` },
   { id: 'debian', name: 'Debian', type: 'text', build: (c, m, v, t, uh, p, g) => `${v?v+' ':''}${t?t+' ':''}${uh?c(m,'(')+uh+c(m,') '):''}${p}${g}` },
@@ -64,7 +59,6 @@ const FRAMES = [
   { id: 'stairs', name: 'Stairs', type: 'text', build: (c, m, v, t, uh, p, g) => `${v?c(m,'_ ')+v+'\\n':''}${t?c(m,'  _ ')+t+'\\n':''}${uh?c(m,'    _ ')+uh+'\\n':''}${c(m,'      _ ')}${p}${g}\\n` }
 ];
 
-// 2. PALETAS DE COLORES (43 colores curados)
 const COLORS = [
   '#ffffff', '#cccccc', '#aaaaaa', '#777777', '#555555',
   '#ff5f5f', '#d70000', '#af0000', '#ff8787', '#ff00af', '#d70087', '#ff5faf',
@@ -74,7 +68,6 @@ const COLORS = [
   '#ff5fff', '#ff00ff', '#af5fff', '#af87ff', '#d7afff', '#d7d7ff', '#5fffff', '#00d7af'
 ];
 
-// Mapeo Hexadecimal -> Código ANSI 256 de Bash/Zsh
 const ANSI_MAP = {
   '#ffffff': '38;5;255', '#cccccc': '38;5;252', '#aaaaaa': '38;5;248', '#777777': '38;5;243', '#555555': '38;5;240',
   '#ff5f5f': '38;5;203', '#d70000': '38;5;160', '#af0000': '38;5;124', '#ff8787': '38;5;210', '#ff00af': '38;5;199', '#d70087': '38;5;162', '#ff5faf': '38;5;205',
@@ -84,7 +77,6 @@ const ANSI_MAP = {
   '#ff5fff': '38;5;207', '#ff00ff': '38;5;201', '#af5fff': '38;5;135', '#af87ff': '38;5;141', '#d7afff': '38;5;183', '#d7d7ff': '38;5;189', '#5fffff': '38;5;87',  '#00d7af': '38;5;43'
 };
 
-// 3. SÍMBOLOS PRINCIPALES DEL PROMPT (Ej: el > al final de la línea)
 const SYMBOLS = [
   'λ','❯','➜','⚡','◆','$','#','>','➤','»','▶','⇒','✓','♠','☮','⇛','▷','♔','☯','✦',
   '⬢','⬣','🤖','👾','🚀','🛸','🔥','👁','☢','☣','☠','⚙','⚔','⚜','⚑','⛩','⚓','⚖','⏳','💡',
@@ -93,25 +85,94 @@ const SYMBOLS = [
   '∆','Ω','∞','≡','≠','⊕','⊗','⇢','↵','⇌','✗','✘','✔','無','空','龍','鬼','神','†','‡'
 ];
 
-// 4. SEPARADORES (Ej: user @ host)
 const SEPARATORS = [
   '㉿','@','⨳','▸','⨯','·','|','/','-','∿','*','::','→','⇔','♦','⚡','🔪','💀','☢','⚙',
   '¦','‖','│','┃','║','┇','┋','\\','//','\\\\','•','○','◘','◙','&','+','=','^','v','≈',
-  '','','','','','','','' // Símbolos de Powerline
+  '','','','','','','','' 
 ];
 
-// 5. LISTA DE MÓDULOS DE COMPONENTES DISPONIBLES
 const ALL_MODULES = [
-  { id: 'venv', name: '🐍 Venv' },
-  { id: 'node', name: '🟩 Node' },
-  { id: 'date', name: '📅 Fecha' },
-  { id: 'time', name: '🕐 Hora' },
-  { id: 'user', name: '👤 User/Host' },
-  { id: 'path', name: '📁 Ruta (Full)' },
-  { id: 'dir',  name: '📂 Carpeta' },
-  { id: 'git',  name: '🌿 Git' },
-  { id: 'ip',   name: '🌐 IP' },
-  { id: 'os',   name: '💻 OS/Kernel' },
-  { id: 'jobs', name: '⚙ Jobs' },
-  { id: 'exit', name: '✓ Exit' }
+  { id: 'venv', es_name: '🐍 Venv', en_name: '🐍 Venv' },
+  { id: 'node', es_name: '🟩 Node', en_name: '🟩 Node' },
+  { id: 'py',   es_name: '🐍 Python', en_name: '🐍 Python' },
+  { id: 'date', es_name: '📅 Fecha', en_name: '📅 Date' },
+  { id: 'time', es_name: '🕐 Hora', en_name: '🕐 Time' },
+  { id: 'user', es_name: '👤 User/Host', en_name: '👤 User/Host' },
+  { id: 'path', es_name: '📁 Ruta (Full)', en_name: '📁 Path (Full)' },
+  { id: 'dir',  es_name: '📂 Carpeta', en_name: '📂 Folder' },
+  { id: 'git',  es_name: '🌿 Git', en_name: '🌿 Git' },
+  { id: 'ip',   es_name: '🌐 IP', en_name: '🌐 IP' },
+  { id: 'os',   es_name: '💻 OS/Kernel', en_name: '💻 OS/Kernel' },
+  { id: 'ram',  es_name: '🧠 RAM', en_name: '🧠 RAM' },
+  { id: 'load', es_name: '🔥 CPU Load', en_name: '🔥 CPU Load' },
+  { id: 'bat',  es_name: '🔋 Batería', en_name: '🔋 Battery' },
+  { id: 'jobs', es_name: '⚙ Jobs', en_name: '⚙ Jobs' },
+  { id: 'exit', es_name: '✓ Exit', en_name: '✓ Exit' }
 ];
+
+const I18N = {
+  es: {
+    subtitle: "Zsh/Bash support, EzPrompt blocks, Light/Dark mode y persistencia local.",
+    topo: "01. Estructura Topológica",
+    symsep: "02. Símbolos & Separadores",
+    colors: "03. Paletas de Color",
+    cmain: "Principal",
+    cpath: "Ruta",
+    cuser: "Usuario",
+    chost: "Host",
+    builder: "04. Constructor Visual (Estilo EzPrompt)",
+    activemods: "Módulos Activos (Arrastra para ordenar)",
+    availmods: "Módulos Disponibles (Clic para añadir)",
+    addtext: "+ Añadir Texto Personalizado",
+    userph: "Custom User (dejar vacío para auto)",
+    hostph: "Custom Host (dejar vacío para auto)",
+    presets: "05. Gestor de Presets",
+    save: "Guardar",
+    load: "Cargar",
+    prevtitle: "Preview Terminal",
+    expbash: "Exportar a BASH",
+    expzsh: "Exportar a ZSH",
+    codeout: "Código Exportado",
+    copy: "COPIAR CÓDIGO",
+    copied: "¡COPIADO!",
+    rand: "🎲 RANDOMIZE",
+    footerr: '"El código trabaja mientras tú duermes."',
+    nopresets: "Sin presets guardados",
+    customText: "Texto...",
+    styles: "ESTILOS",
+    icons: "ICONOS",
+    time12h: "Formato 12h (AM/PM)"
+  },
+  en: {
+    subtitle: "Zsh/Bash support, EzPrompt blocks, Light/Dark mode and local persistence.",
+    topo: "01. Topological Structure",
+    symsep: "02. Symbols & Separators",
+    colors: "03. Color Palettes",
+    cmain: "Primary",
+    cpath: "Path",
+    cuser: "User",
+    chost: "Host",
+    builder: "04. Visual Builder (EzPrompt Style)",
+    activemods: "Active Modules (Drag to reorder)",
+    availmods: "Available Modules (Click to add)",
+    addtext: "+ Add Custom Text",
+    userph: "Custom User (leave empty for auto)",
+    hostph: "Custom Host (leave empty for auto)",
+    presets: "05. Preset Manager",
+    save: "Save",
+    load: "Load",
+    prevtitle: "Terminal Preview",
+    expbash: "Export to BASH",
+    expzsh: "Export to ZSH",
+    codeout: "Exported Code",
+    copy: "COPY CODE",
+    copied: "COPIED!",
+    rand: "🎲 RANDOMIZE",
+    footerr: '"Code works while you sleep."',
+    nopresets: "No saved presets",
+    customText: "Text...",
+    styles: "STYLES",
+    icons: "ICONS",
+    time12h: "12h Format (AM/PM)"
+  }
+};
