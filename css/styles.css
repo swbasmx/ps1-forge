@@ -264,7 +264,14 @@ body.light .deco-asterisk { color: #ddd; }
 /* =========================================
    PANEL DE PREVISUALIZACIÓN Y CÓDIGO
    ========================================= */
-.preview-panel { padding: 40px 30px; position: relative; background: var(--bg); }
+.preview-panel { 
+  padding: 40px 30px; 
+  position: sticky; 
+  top: 0; 
+  max-height: 100vh; 
+  overflow-y: auto; 
+  background: var(--bg); 
+}
 .pbox { 
   background: #050505; 
   border: 1px solid #1a1a1a; 
