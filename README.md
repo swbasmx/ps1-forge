@@ -9,11 +9,8 @@
 ## 🎥 Project Demo
 👉 **[Ver Demo en Vivo](https://ps1-forge.vercel.app/)**
 
-## 📸 Previsualización
-![PS1 Forge UI](./screenshot.png)
-
-### 🎥 Demo Interactivo
-<video src="./demo.webm" width="100%" autoplay loop muted controls></video>
+## 📸 Demo Interactivo
+https://github.com/swbasmx/ps1-forge/raw/main/.assets/demo.webm
 
 ## ✨ Features
 - **50 Marcos Topológicos Absolutos:** Desde diseños clásicos de terminal (`Kali`, `Ubuntu`, `macOS`) hasta estilos creativos y semánticos (`JS Code`, `SQL Query`, `Cyberpunk`, `Matrix`).
